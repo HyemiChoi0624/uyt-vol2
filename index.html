@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unveil Your Taste Vol.2 — 시음 노트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bone:#EFEBE2; --sumi:#24221E; --ink:#2A2723; --brass:#A5834B; --lbrass:#C4A56A;
+  --grey:#7A756C; --hair:#CFC9BC; --light:#E5E0D5;
+  --serif: Georgia, "Noto Serif", "Times New Roman", serif;
+  --sans: -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bone);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+body{min-height:100vh}
+.wrap{max-width:460px;margin:0 auto;padding:28px 22px 120px}
+.kicker{font-size:10px;letter-spacing:.32em;color:var(--brass);text-transform:uppercase;font-weight:500}
+.rule{height:0;border-top:1px solid var(--ink);opacity:.55;margin:14px 0 22px}
+.hair{border-top:1px solid var(--hair)}
+h1{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.15;letter-spacing:-.01em;margin-top:14px}
+h2{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.2;margin-top:10px}
+h3{font-size:15px;font-weight:700;margin:0}
+.sub{color:var(--grey);font-size:13.5px;line-height:1.6;margin-top:8px}
+.em{font-family:var(--serif);font-style:italic;color:var(--lbrass)}
+.tag{display:inline-block;border:1px solid var(--brass);color:var(--brass);font-size:9.5px;letter-spacing:.28em;padding:4px 8px 3px;font-weight:700}
+.dark{background:var(--sumi);color:var(--bone);margin:-28px -22px 24px;padding:30px 22px 26px}
+.dark .sub{color:var(--hair)}
+.dark h1,.dark h2{color:var(--bone)}
+.sec{margin-top:26px}
+.label{font-size:10px;letter-spacing:.24em;color:var(--grey);font-weight:700;text-transform:uppercase;margin-bottom:10px}
+.q{font-size:15px;line-height:1.55;margin-bottom:12px}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt{flex:1 1 0;min-width:0;background:transparent;border:1px solid var(--ink);color:var(--ink);font-family:var(--sans);font-size:14px;padding:13px 8px;cursor:pointer;line-height:1.35;border-radius:0;-webkit-appearance:none}
+.opt.on{background:var(--sumi);color:var(--bone);border-color:var(--sumi)}
+.opt small{display:block;font-size:11px;opacity:.7;margin-top:2px}
+input.word,input.code,input.name{width:100%;border:0;border-bottom:1px solid var(--ink);background:transparent;font-family:var(--sans);font-size:16px;padding:10px 0;color:var(--ink);border-radius:0;outline:none}
+input.word::placeholder,input.code::placeholder,input.name::placeholder{color:#A8A296}
+.glass{padding-top:18px;margin-top:22px;border-top:1px solid var(--hair)}
+.glass .gname{font-family:var(--serif);font-size:24px;color:var(--brass);display:flex;align-items:baseline;gap:10px}
+.glass .gname span{font-size:12px;color:var(--grey);font-family:var(--sans)}
+.row{display:grid;grid-template-columns:64px 1fr;gap:10px;padding:11px 0;border-bottom:1px solid var(--hair);font-size:13.5px;line-height:1.5}
+.row b{font-size:10.5px;color:var(--grey);font-weight:700;letter-spacing:.06em;padding-top:2px}
+.wine{margin-top:22px;padding-top:16px;border-top:1px solid var(--hair)}
+.wine .no{font-family:var(--serif);color:var(--brass);font-size:20px}
+.wine .nm{font-family:var(--serif);font-size:20px;line-height:1.25;margin:4px 0 2px}
+.wine .rg{font-size:12px;color:var(--grey)}
+.wine .one{font-family:var(--serif);font-style:italic;color:var(--brass);font-size:15px;margin:12px 0 4px}
+.picked{font-size:10px;letter-spacing:.2em;color:var(--bone);background:var(--brass);padding:3px 7px 2px;margin-left:8px;font-family:var(--sans);font-weight:700;vertical-align:middle}
+.note{font-size:13px;color:var(--grey);line-height:1.6;margin-top:14px;font-style:italic}
+.ask{margin-top:22px;padding:16px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.5}
+.ask .k{display:block;font-family:var(--sans);font-style:normal;font-size:10px;letter-spacing:.24em;color:var(--brass);font-weight:700;margin-bottom:6px}
+.feedback{margin-top:12px;font-size:14px;line-height:1.55}
+.feedback .ok{color:var(--brass);font-weight:700}
+/* axis */
+.axis{margin:18px 0 6px}
+.axis .ln{position:relative;height:18px}
+.axis .ln:before{content:"";position:absolute;left:0;right:0;top:9px;border-top:1px solid var(--lbrass)}
+.axis .ln i{position:absolute;top:4px;width:11px;height:11px;border-radius:50%;background:var(--brass);transform:translateX(-50%)}
+.axis .ends{display:flex;justify-content:space-between;font-size:11.5px;color:var(--grey);margin-top:2px}
+.axis .ends .on{color:var(--ink);font-weight:700}
+.dark .axis .ends{color:var(--hair)} .dark .axis .ends .on{color:var(--bone)}
+/* result */
+.type-en{font-family:var(--serif);font-style:italic;color:var(--lbrass);font-size:17px;margin-top:6px}
+.keys{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}
+.keys span{border:1px solid var(--lbrass);color:var(--lbrass);font-size:11.5px;padding:4px 9px 3px}
+.rec{padding:16px 0;border-bottom:1px solid var(--hair)}
+.rec .st{font-size:11px;color:var(--brass);letter-spacing:.1em;font-weight:700}
+.rec .bt{font-family:var(--serif);font-size:18px;margin:4px 0 6px;line-height:1.3}
+.rec p{font-size:13.5px;color:var(--ink);line-height:1.6}
+.words{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.words div{padding:10px 0;border-bottom:1px solid var(--hair);font-size:12px;color:var(--grey)}
+.words div b{display:block;font-family:var(--serif);font-size:16px;color:var(--ink);font-weight:400;margin-top:2px}
+.other{padding:12px 0;border-bottom:1px solid var(--hair);font-size:13px;line-height:1.5}
+.other b{font-family:var(--serif);font-weight:400;font-size:15px}
+.other span{color:var(--grey)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:transparent;border:1px solid var(--hair);color:var(--ink);font-family:var(--sans);font-size:13px;padding:8px 11px;cursor:pointer;border-radius:0;-webkit-appearance:none}
+.chip.on{background:var(--brass);border-color:var(--brass);color:var(--bone)}
+.cnote{font-size:11px;color:var(--grey);margin-top:6px}
+.gate2 .opt{flex:1 1 40%}
+.small{font-size:11.5px;color:var(--grey);line-height:1.6;margin-top:14px}
+/* nav */
+.nav{position:fixed;left:0;right:0;bottom:0;background:var(--bone);border-top:1px solid var(--hair);padding:12px 22px calc(12px + env(safe-area-inset-bottom))}
+.nav .in{max-width:416px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.nav .pg{font-size:10px;letter-spacing:.24em;color:var(--grey);flex:0 0 auto;min-width:64px}
+.btn{flex:1;border:1px solid var(--ink);background:var(--sumi);color:var(--bone);font-family:var(--sans);font-size:14.5px;padding:14px 10px;cursor:pointer;border-radius:0;-webkit-appearance:none;font-weight:500}
+.btn.ghost{background:transparent;color:var(--ink);flex:0 0 74px}
+.btn:disabled{opacity:.28;cursor:default}
+.hint{font-size:12px;color:var(--grey);margin-top:10px;min-height:16px}
+.err{color:#8C3B2E}
+.foot{margin-top:40px;font-size:10px;letter-spacing:.3em;color:var(--grey)}
+.link{background:none;border:0;color:var(--grey);text-decoration:underline;font-size:12px;cursor:pointer;font-family:var(--sans);padding:6px 0}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<nav class="nav"><div class="in">
+  <span class="pg" id="pg">01 / 07</span>
+  <button class="btn ghost" id="prev">이전</button>
+  <button class="btn" id="next">다음</button>
+</div></nav>
+
+<script>
+(function(){
+const KEY = "uyt-vol2-v2";
+const CODES = { r2: "연기", r3: "안개" };
+const GATE_OPTS = { r2: ["석회", "연기", "햇살", "바람"], r3: ["가시", "장미", "안개", "돌"] };
+const blank = () => ({
+  step: 0, name: "",
+  f1: { cmp: null, acid: null, word: [] },
+  f2: { A: { word: [] }, B: { word: [] }, pick: null },
+  r2: false,
+  f3: { A: { word: [] }, B: { word: [] }, same: null, pinot: null, pick: null },
+  r3: false, resetArm: false
+});
+let st = blank();
+try { const s = JSON.parse(localStorage.getItem(KEY) || "null"); if (s && typeof s === "object") st = Object.assign(blank(), s, { resetArm: false });
+  [st.f1, st.f2.A, st.f2.B, st.f3.A, st.f3.B].forEach(o => { if (!Array.isArray(o.word)) o.word = []; }); } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
+
+const TYPES = {
+  AA: { ko: "햇살과 꽃향기", en: "The Bright Bloom",
+    desc: "향이 먼저 마음을 여는 와인을 좋아합니다. 선명한 과일, 화사한 꽃향, 부드럽게 흘러가는 질감. 첫 모금에 웃게 되는 와인이 당신의 잔입니다.",
+    keys: ["선명한 과일", "꽃향", "실키한 질감"],
+    recs: [
+      ["보졸레 크뤼 · 가메", "Marcel Lapierre Morgon", "꽃과 붉은 과일, 탄닌은 가볍게. Roserock이 좋았다면 자연스러운 다음 잔입니다."],
+      ["센트럴 오타고 피노 누아", "Felton Road Bannockburn Pinot Noir", "뉴질랜드 남섬의 햇살을 머금은 피노 누아. 과일은 진하고 결은 실키합니다."],
+      ["리아스 바이샤스 알바리뇨", "Pazo de Señorans Albariño", "복숭아와 짭짤한 바닷바람, 경쾌한 산도. Greywacke의 생기를 좋아했다면."]
+    ] },
+  BB: { ko: "돌과 가시", en: "The Stone & Thorn",
+    desc: "질감과 구조, 긴 여운에 끌립니다. 입안을 채우는 무게, 단단한 뼈대, 시간이 지날수록 열리는 향. 천천히 대화하듯 마시는 와인이 당신의 잔입니다.",
+    keys: ["질감", "단단한 구조", "긴 여운"],
+    recs: [
+      ["바롤로 · 네비올로", "G.D. Vajra Barolo Albe", "바르바레스코의 형제 산지. 장미와 타르에 한층 더 단단한 가시가 있습니다."],
+      ["푸이 퓌메의 전설", "Didier Dagueneau Silex", "La Léontine을 만든 Valérie의 사촌이 남긴 와인. 부싯돌과 배럴의 정점 — 구하기 어려운 귀한 병입니다."],
+      ["페삭-레오냥 화이트", "Château Carbonnieux Blanc", "소비뇽 블랑에 세미용과 오크를 더한 보르도 화이트. 둥글고 단단한 질감."]
+    ] },
+  AB: { ko: "긴장과 선명함", en: "The Taut Line",
+    desc: "팽팽한 산도와 또렷한 윤곽을 좋아합니다. 과일은 선명하게, 구조는 단단하게. 입안에서 선이 살아 있는 와인이 당신의 잔입니다.",
+    keys: ["높은 산도", "선명한 윤곽", "단단한 탄닌"],
+    recs: [
+      ["샤블리 프리미에 크뤼", "William Fèvre Chablis 1er Cru", "굴껍질과 석회질 토양의 날 선 산도. 오늘 첫 잔 Delamotte와 같은 결입니다."],
+      ["에트나 로쏘 · 네렐로 마스칼레제", "Benanti Etna Rosso", "시칠리아 화산 토양의 옅은 레드. 네비올로처럼 팽팽한 탄닌을 품었습니다."],
+      ["랑게 네비올로", "Produttori del Barbaresco Langhe Nebbiolo", "오늘 Ovello를 만든 협동조합의 막내. 더 일찍, 더 가볍게 즐기는 네비올로."]
+    ] },
+  BA: { ko: "비단과 둥근 결", en: "The Silk Round",
+    desc: "둥글고 우아한 균형에 마음이 갑니다. 모난 데 없이 부드러운 질감, 은은한 향, 오래 머무는 온기. 편안하게 곁에 두는 와인이 당신의 잔입니다.",
+    keys: ["둥근 질감", "우아함", "부드러운 균형"],
+    recs: [
+      ["부르고뉴 · 볼네", "Joseph Drouhin Volnay", "Roserock을 만든 Drouhin 가문의 본가. 코트 드 본의 비단결 피노 누아."],
+      ["블랑 드 누아 샴페인", "Devaux Cœur des Bar", "Vol.1에서 만난 피노 누아 100% 샴페인. 둥근 볼륨과 붉은 과일."],
+      ["리오하 레세르바", "Marqués de Murrieta Reserva", "부드러운 탄닌과 바닐라, 오래 숙성된 둥근 결의 스페인 레드."]
+    ] }
+};
+const TYPE_KEY = () => (st.f2.pick || "A") + (st.f3.pick || "A");
+
+const $ = (h) => { const d = document.createElement("div"); d.innerHTML = h; return d; };
+const esc = (s) => String(s || "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const app = document.getElementById("app");
+
+function opts(path, list) {
+  const cur = get(path);
+  return `<div class="opts">${list.map(([v, t, s]) => `<button class="opt${cur === v ? " on" : ""}" data-set="${path}" data-v="${v}">${t}${s ? `<small>${s}</small>` : ""}</button>`).join("")}</div>`;
+}
+const WORDS = {
+  f1: ["레몬 껍질", "청사과", "젖은 돌", "갓 구운 빵", "흰꽃", "견과"],
+  f2: ["자몽", "패션프루트", "풀·허브", "흰꽃", "부싯돌·연기", "젖은 돌", "크리미함", "스파이스"],
+  f3: ["라즈베리", "체리", "장미", "제비꽃", "흙·숲", "가죽", "타르", "향신료"]
+};
+function word(path) {
+  const cur = get(path) || [], list = WORDS[path.split(".")[0]];
+  return `<div class="chips">${list.map(w => `<button class="chip${cur.includes(w) ? " on" : ""}" data-chip="${path}" data-v="${w}">${w}</button>`).join("")}</div><div class="cnote">최대 2개까지 고를 수 있어요.</div>`;
+}
+function get(path) { return path.split(".").reduce((o, k) => o && o[k], st); }
+function set(path, v) { const ks = path.split("."); const last = ks.pop(); ks.reduce((o, k) => o[k], st)[last] = v; save(); }
+function axis(left, right, side, dark) {
+  const pos = side === "L" ? 18 : side === "R" ? 82 : 50;
+  return `<div class="axis"><div class="ln">${side ? `<i style="left:${pos}%"></i>` : ""}</div><div class="ends"><span class="${side === "L" ? "on" : ""}">${left}</span><span class="${side === "R" ? "on" : ""}">${right}</span></div></div>`;
+}
+function glassBlock(f, g, rows) {
+  return `<div class="glass"><div class="gname">Glass ${g}<span>${f === "f2" ? (g === "A" ? "02" : "03") : (g === "A" ? "04" : "05")}</span></div>
+    ${rows.map(r => `<div class="row"><b>${r[0]}</b><span>${r[1]}</span></div>`).join("")}
+    <div class="sec" style="margin-top:16px"><div class="label">가장 먼저 느껴진 향 · 최대 2개</div>${word(`${f}.${g}.word`)}</div></div>`;
+}
+
+const SCREENS = [
+  // 0 intro
+  () => `<div class="dark"><div class="kicker">ABC5기 – WW&amp;F소모임 · Vol.2</div>
+      <h1>Unveil Your Taste</h1>
+      <div class="em" style="font-size:16px;margin-top:6px">One Autumn Night with Champagne, White &amp; Red Wine</div>
+      <div class="sub" style="margin-top:14px">닮은 잔 속, 서로 다른 땅의 기억</div></div>
+    <div class="label">오늘의 시음 노트</div>
+    <p class="q">다섯 잔을 마시며 이 노트에 기록하면, 마지막에 <b>나의 취향 유형</b>과 <b>다음에 시도해 볼 와인</b>을 보여드립니다.</p>
+    <div class="sec"><div class="label">이름 또는 별명 (선택)</div><input class="name" data-word="name" maxlength="16" placeholder="예: 혜미" value="${esc(st.name)}"></div>
+    <div class="sec"><div class="label">블라인드로 마시는 세 가지 방법</div>
+      <div class="row"><b>01</b><span><b style="color:var(--ink);font-size:14px;letter-spacing:0">더 끌린 잔 하나 고르기</b><br>이유는 나중에. 끌림이 가장 정직한 취향입니다.</span></div>
+      <div class="row"><b>02</b><span><b style="color:var(--ink);font-size:14px;letter-spacing:0">점수 · 가격 · 산지는 잠시 잊기</b><br>맞히는 게임이 아니라, 고르는 시간입니다.</span></div>
+      <div class="row"><b>03</b><span><b style="color:var(--ink);font-size:14px;letter-spacing:0">느낀 향을 한두 개 고르기</b><br>“자몽” “젖은 돌” “장미” — 정답은 없습니다.</span></div></div>`,
+  // 1 flight 1
+  () => `<div class="dark"><div class="kicker">Flight 1 · Recap</div><h2>지난번의 복습</h2>
+      <div class="em" style="margin-top:4px">블랑 드 누아의 반대편</div><div style="margin-top:14px"><span class="tag">OPEN</span></div></div>
+    <div class="wine" style="border:0;margin-top:0;padding-top:0"><span class="no">01</span>
+      <div class="nm">Delamotte Blanc de Blancs</div><div class="rg">Champagne NV · 샤르도네 100% · 코트 데 블랑</div></div>
+    <div class="row" style="margin-top:12px"><b>Vol.1</b><span>Devaux Cœur des Bar · 블랑 드 누아 — 피노 누아로 만든 둥근 볼륨, 붉은 과일</span></div>
+    <div class="row"><b>오늘</b><span>블랑 드 블랑 — 같은 샴페인, 이번엔 샤르도네만으로</span></div>
+    <div class="row"><b>고향</b><span>Le Mesnil-sur-Oger · Salon의 자매 하우스</span></div>
+    <div class="row"><b>양조</b><span>스테인리스 · 효모 숙성 4~5년 · 도자쥬 약 7 g/L</span></div>
+    <div class="row"><b>찾아볼 것</b><span>둥근 볼륨 대신 레몬 껍질 같은 산도, 마른 질감, 갓 구운 빵</span></div>
+    <div class="sec"><div class="label">지난번 블랑 드 누아와 비교하면, 이 잔은</div>${opts("f1.cmp", [["L", "더 가볍고 날렵하다"], ["R", "더 풍성하고 둥글다"]])}</div>
+    <div class="sec"><div class="label">이 산도가</div>${opts("f1.acid", [["L", "편안했다"], ["R", "날카로웠다"]])}</div>
+    <div class="sec"><div class="label">가장 먼저 느껴진 향 · 최대 2개</div>${word("f1.word")}</div>
+    <p class="note">지난번 기억을 한 번 꺼내 보는 잔입니다. 오늘의 블라인드는 다음 잔부터.</p>`,
+  // 2 flight 2 blind
+  () => `<div class="dark"><div class="kicker">Flight 2 · Same Grape, Different Worlds</div><h2>Sauvignon Blanc</h2>
+      <div class="sub">두 잔 모두 소비뇽 블랑 100%. 어디서 왔는지는 비밀입니다.</div><div style="margin-top:14px"><span class="tag">BLIND</span></div></div>
+    ${glassBlock("f2", "A", [["향", "과일이 먼저? 돌·연기가 먼저?"]])}
+    ${glassBlock("f2", "B", [["향", "과일이 먼저? 돌·연기가 먼저?"]])}
+    <div class="sec" style="border-top:1px solid var(--ink);padding-top:18px"><div class="label">더 끌린 잔은?</div>${opts("f2.pick", [["A", "Glass A"], ["B", "Glass B"]])}<div class="hint" id="h"></div></div>`,
+  // 3 flight 2 reveal
+  () => !st.r2 ? gate("r2", "Flight 2 공개", "호스트가 공개할 때 한 단어를 알려드려요.") : `
+    <div class="dark"><div class="kicker">Flight 2 · Reveal</div><h2>같은 품종, 다른 세계</h2>
+      ${axis("태양의 과일", "돌의 연기", st.f2.pick === "A" ? "L" : "R", true)}</div>
+    ${wine("02", "A", "Greywacke Sauvignon Blanc 2022", "Marlborough, New Zealand", "태양의 과일", st.f2.pick === "A",
+      [["사람", "Kevin Judd — Cloudy Bay 창립부터 25년 수석 와인메이커"], ["땅", "와이라우 계곡의 둥근 greywacke 강돌"], ["양조", "주로 스테인리스 · 일부 오래된 오크"], ["향", "자몽 · 패션프루트 · 블랙커런트 잎"]])}
+    ${wine("03", "B", "Serge Dagueneau & Filles La Léontine 2021", "Pouilly-Fumé, Loire, France", "돌의 연기", st.f2.pick === "B",
+      [["사람", "Valérie Dagueneau — 전설 Didier Dagueneau의 사촌"], ["땅", "생탕들랭의 석회암 · 부싯돌(silex)"], ["양조", "3~5년 된 배럴에서 1년 숙성"], ["향", "시트러스 · 흰꽃 · 부싯돌 · 스모크"]])}
+    <div class="ask"><span class="k">함께 이야기해요</span>Fumé는 ‘연기’라는 뜻. 이 스모키함은 땅에서 왔을까, 오크통에서 왔을까?</div>
+    <p class="note">빈티지는 한 해 차이지만, 남반구의 봄과 북반구의 가을 — 실제 수확은 반년 차이입니다.</p>`,
+  // 4 flight 3 blind
+  () => `<div class="dark"><div class="kicker">Flight 3 · The Twist</div><h2>Two Pale Reds</h2>
+      <div class="sub">옅은 붉은빛 두 잔 — 이번에도, 같은 품종일까요?</div><div style="margin-top:14px"><span class="tag">BLIND</span></div></div>
+    ${glassBlock("f3", "A", [["색", "가장자리가 붉은가? 벽돌빛인가?"], ["탄닌", "혀를 쓰다듬나? 잇몸을 조이나?"]])}
+    ${glassBlock("f3", "B", [["색", "가장자리가 붉은가? 벽돌빛인가?"], ["탄닌", "혀를 쓰다듬나? 잇몸을 조이나?"]])}
+    <div class="sec" style="border-top:1px solid var(--ink);padding-top:18px"><div class="label">Q1 · 두 잔은 같은 품종일까요?</div>${opts("f3.same", [["Y", "같은 품종"], ["N", "다른 품종"]])}</div>
+    ${st.f3.same ? `<div class="sec"><div class="label">Q2 · 사실 하나는 피노 누아입니다. 어느 쪽일까요?</div>${opts("f3.pinot", [["A", "Glass A"], ["B", "Glass B"]])}</div>` : `<p class="hint">Q1에 답하면 다음 질문이 열립니다.</p>`}
+    <div class="sec"><div class="label">더 끌린 잔은?</div>${opts("f3.pick", [["A", "Glass A"], ["B", "Glass B"]])}<div class="hint" id="h"></div></div>`,
+  // 5 flight 3 reveal
+  () => !st.r3 ? gate("r3", "Flight 3 공개", "호스트가 공개할 때 한 단어를 알려드려요.") : `
+    <div class="dark"><div class="kicker">Flight 3 · Reveal</div><h2>같은 얼굴, 다른 품종</h2>
+      ${axis("가시 없는 장미", "가시 있는 장미", st.f3.pick === "A" ? "L" : "R", true)}</div>
+    <div class="feedback">Q1 — 당신의 답: <b>${st.f3.same === "Y" ? "같은 품종" : "다른 품종"}</b>. ${st.f3.same === "N" ? `<span class="ok">정답!</span> 두 잔은 다른 품종이었습니다.` : `선입견을 벗기는 반전 — 두 잔은 다른 품종이었습니다.`}<br>
+      Q2 — 피노 누아는 <b>Glass A</b>. ${st.f3.pinot === "A" ? `<span class="ok">맞히셨어요.</span>` : `탄닌이 결정적인 단서였습니다.`}</div>
+    ${wine("04", "A", "Roserock Zéphirine Pinot Noir 2022", "Eola-Amity Hills, Oregon · 피노 누아", "가시 없는 장미 · 바람", st.f3.pick === "A",
+      [["사람", "부르고뉴 Drouhin 가문의 오리건 피노"], ["땅", "화산 현무암 · Van Duzer Corridor의 찬 바람"], ["이름", "1868년 가시 없는 덩굴장미 ‘Zéphirine Drouhin’"], ["향", "라즈베리 · 장미 꽃잎 · 제비꽃"]])}
+    ${wine("05", "B", "Produttori del Barbaresco Ovello Riserva 2020", "Barbaresco, Piemonte · 네비올로", "가시 있는 장미 · 안개", st.f3.pick === "B",
+      [["사람", "1958년 마을 신부와 소농 19명의 협동조합"], ["땅", "마을 최북단 밭 Ovello · 점토와 석회"], ["이름", "Nebbiolo ← nebbia(안개)"], ["향", "체리 · 장미 · 철분 · 타르"]])}
+    <p class="note">알코올은 14.1%와 14.5%로 거의 같은데, 느낌은 정반대 — 차이는 탄닌입니다.</p>`,
+  // 6 result
+  () => result()
+];
+
+function wine(no, g, name, region, one, picked, rows) {
+  return `<div class="wine"><span class="no">${no}</span> <span style="font-size:12px;color:var(--grey)">Glass ${g}</span>${picked ? `<span class="picked">내가 고른 잔</span>` : ""}
+    <div class="nm">${esc(name)}</div><div class="rg">${region}</div><div class="one">${one}</div>
+    ${rows.map(r => `<div class="row"><b>${r[0]}</b><span>${r[1]}</span></div>`).join("")}</div>`;
+}
+function gate(k, title, msg) {
+  return `<div class="dark"><div class="kicker">Reveal</div><h2>${title}</h2><div class="sub">${msg}</div></div>
+    <div class="label">호스트가 말한 단어를 고르세요</div>
+    <div class="opts gate2">${GATE_OPTS[k].map(w => `<button class="opt" data-gate="${k}" data-v="${w}">${w}</button>`).join("")}</div>
+    <div class="hint" id="gh"></div>
+    <p class="note">호스트가 라벨을 공개하기 전까지는 잠겨 있어요.</p>`;
+}
+function result() {
+  const t = TYPES[TYPE_KEY()];
+  const who = st.name ? esc(st.name) + "님의" : "당신의";
+  const mod = st.f1.acid === "R"
+    ? "산도가 날카롭게 느껴졌다면 — 같은 유형 안에서 조금 더 따뜻한 산지나 숙성이 더 된 빈티지를 고르면 훨씬 편안해집니다."
+    : "산도가 편안했다면 — 서늘한 산지의 와인이 당신의 기본값입니다. 아래 추천도 그 결에서 골랐어요.";
+  const words = [["Delamotte", st.f1.word], ["Greywacke", st.f2.A.word], ["La Léontine", st.f2.B.word], ["Roserock", st.f3.A.word], ["Ovello", st.f3.B.word]];
+  const others = Object.entries(TYPES).filter(([k]) => k !== TYPE_KEY());
+  const comboTxt = { AA: "Greywacke + Roserock", BB: "La Léontine + Ovello", AB: "Greywacke + Ovello", BA: "La Léontine + Roserock" };
+  return `<div class="dark"><div class="kicker">Your Taste · ${who} 취향</div>
+      <h1>${t.ko}</h1><div class="type-en">${t.en}</div>
+      <div class="sub" style="margin-top:14px;color:var(--bone);line-height:1.7">${t.desc}</div>
+      <div class="keys">${t.keys.map(k => `<span>${k}</span>`).join("")}</div></div>
+    <div class="label">나의 세 좌표</div>
+    ${axis("첫 잔 산도가 편안했다", "날카로웠다", st.f1.acid)}
+    ${axis("태양의 과일", "돌의 연기", st.f2.pick === "A" ? "L" : "R")}
+    ${axis("가시 없는 장미", "가시 있는 장미", st.f3.pick === "A" ? "L" : "R")}
+    <p class="note">${mod}</p>
+    <div class="sec"><div class="label">다음에 시도해 볼 와인</div>
+      ${t.recs.map(r => `<div class="rec"><div class="st">${r[0]}</div><div class="bt">${esc(r[1])}</div><p>${r[2]}</p></div>`).join("")}
+      <p class="small">추천은 스타일의 예시입니다. 같은 산지·품종의 다른 생산자도 좋은 출발점이에요.</p></div>
+    <div class="sec"><div class="label">오늘 내가 고른 향</div>
+      <div class="words">${words.map(w => `<div>${w[0]}<b>${(w[1] && w[1].length) ? esc(w[1].join(" · ")) : "—"}</b></div>`).join("")}</div></div>
+    <div class="sec"><div class="label">다른 유형들</div>
+      ${others.map(([k, o]) => `<div class="other"><b>${o.ko}</b> <span class="em" style="font-size:13px">${o.en}</span><br><span>${comboTxt[k]} — ${o.keys.join(" · ")}</span></div>`).join("")}
+      <p class="small">유형은 오늘 두 블라인드 플라이트에서 고른 잔의 조합으로 정해집니다. 정답이 아니라 이야깃거리예요.</p></div>
+    <div class="sec" style="text-align:center"><button class="link" id="reset">${st.resetArm ? "정말 처음부터? 한 번 더 누르세요" : "처음부터 다시"}</button></div>
+    <div class="foot">UNVEIL YOUR TASTE · VOL.2</div>`;
+}
+
+function ready() {
+  switch (st.step) {
+    case 2: return !!st.f2.pick || "더 끌린 잔을 골라주세요.";
+    case 3: return st.r2 || "호스트가 말한 단어를 골라주세요.";
+    case 4: return (st.f3.same && st.f3.pinot && st.f3.pick) ? true : "Q1, Q2와 더 끌린 잔을 모두 골라주세요.";
+    case 5: return st.r3 || "호스트가 말한 단어를 골라주세요.";
+    default: return true;
+  }
+}
+function render() {
+  app.innerHTML = SCREENS[st.step]();
+  document.getElementById("pg").textContent = String(st.step + 1).padStart(2, "0") + " / " + String(SCREENS.length).padStart(2, "0");
+  const prev = document.getElementById("prev"), next = document.getElementById("next");
+  prev.disabled = st.step === 0;
+  const last = st.step === SCREENS.length - 1;
+  next.style.display = last ? "none" : "";
+  next.textContent = st.step === 0 ? "시작하기" : st.step === 5 ? "나의 취향 보기" : "다음";
+  const r = ready(); next.disabled = r !== true;
+  const hh = document.getElementById("h"); if (hh) hh.textContent = r === true ? "" : r;
+}
+app.addEventListener("click", (e) => {
+  const c = e.target.closest("[data-chip]");
+  if (c) {
+    const cur = (get(c.dataset.chip) || []).slice(), v = c.dataset.v, i = cur.indexOf(v);
+    if (i >= 0) cur.splice(i, 1); else { if (cur.length >= 2) cur.shift(); cur.push(v); }
+    set(c.dataset.chip, cur); const y = window.scrollY; render(); window.scrollTo(0, y); return;
+  }
+  const gb = e.target.closest("[data-gate]");
+  if (gb) {
+    const k = gb.dataset.gate;
+    if (gb.dataset.v === CODES[k]) { st[k] = true; save(); render(); window.scrollTo(0, 0); }
+    else { const h = document.getElementById("gh"); h.textContent = "아직이에요. 호스트가 말한 단어를 다시 확인해 주세요."; h.className = "hint err"; }
+    return;
+  }
+  const b = e.target.closest("[data-set]");
+  if (b) { set(b.dataset.set, b.dataset.v); const y = window.scrollY; render(); window.scrollTo(0, y); return; }
+  if (e.target.id === "reset") {
+    if (st.resetArm) { st = blank(); save(); render(); window.scrollTo(0, 0); }
+    else { st.resetArm = true; render(); }
+  }
+});
+app.addEventListener("input", (e) => {
+  const w = e.target.dataset.word; if (!w) return;
+  if (w === "name") { st.name = e.target.value; save(); } else set(w, e.target.value);
+});
+document.getElementById("next").addEventListener("click", () => { if (ready() === true && st.step < SCREENS.length - 1) { st.step++; st.resetArm = false; save(); render(); window.scrollTo(0, 0); } });
+document.getElementById("prev").addEventListener("click", () => { if (st.step > 0) { st.step--; save(); render(); window.scrollTo(0, 0); } });
+render();
+})();
+</script>
+</body>
+</html>
